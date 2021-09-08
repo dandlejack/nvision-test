@@ -5,7 +5,7 @@ npm install
 ## How to run script
 npm start
 ## Example
-![Example 1](https://i.ibb.co/wpcG9bz/result1.jpg)
-![Example 2](https://i.ibb.co/6J0Bk0b/result2.jpg)
+![Example 1](https://i.ibb.co/h87xrhz/result1.jpg)
+![Example 2](https://i.ibb.co/r411W3X/result2.jpg)
 ## More
 You can learn object detection in [Nvision Docs](https://docs.nvision.nipa.cloud/how-to-guides/detect-objects).

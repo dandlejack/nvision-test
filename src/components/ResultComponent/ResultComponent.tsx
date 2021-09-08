@@ -48,13 +48,13 @@ export const ResultComponent: React.FC = () => {
                 ctx.strokeStyle = '#FF0000'
                 boundaries.detected_objects.map((detailObjs: any) => {
                     ctx?.strokeRect(detailObjs.bounding_box.left, detailObjs.bounding_box.top, detailObjs.bounding_box.right - detailObjs.bounding_box.left, detailObjs.bounding_box.bottom - detailObjs.bounding_box.top)
-                    ctx!.font = (storeXYOfOriginal.width/50).toFixed(0).toString()+"px Arial";                    
+                    ctx!.font = (storeXYOfOriginal.width/35).toFixed(0).toString()+"px serif";                    
                     ctx!.fillStyle = 'red'
                     ctx?.fillRect(detailObjs.bounding_box.left-3,detailObjs.bounding_box.top-30,detailObjs.bounding_box.right - detailObjs.bounding_box.left+4,30)
                     ctx!.fillStyle = 'blue'
-                    ctx!.fillText(detailObjs.name +' : '+((detailObjs.confidence*100).toFixed(2)).toString() , detailObjs.bounding_box.left, detailObjs.bounding_box.top-5);
+                    ctx!.fillText(detailObjs.name +' : '+((detailObjs.confidence*100).toFixed(2)).toString() , detailObjs.bounding_box.left, detailObjs.bounding_box.top);
                 })
-                const canvasToImage = canvas.toDataURL('image/jpeg')
+                const canvasToImage = canvas.toDataURL('image/jpeg',1)
                 setNewImage(canvasToImage)
             }
         }

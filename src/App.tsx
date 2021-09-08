@@ -44,9 +44,9 @@ function App() {
       <div>
         <div className='flex flex-warp justify-center mt-10' style={{ height: 45, backgroundColor: '#fafafa', border: '1px dashed' }}>
           <div style={{ margin: 'auto 0px' }}>
-            <Upload id='upload' ref={ref} buttonLabel='Browse' onChange={handleChange} buttonStyle='custom-file-upload text-underline mr-10'></Upload>
+            <Upload id='upload' ref={ref} buttonLabel='Browse' onChange={handleChange} buttonStyle='custom-file-upload text-underline-hover mr-10'></Upload>
             <span className='mr-10'>or</span>
-            <label className='text-underline'>
+            <label className='text-underline-hover'>
               <Button buttonLabel={cameraState.btnLabel} buttonClick={() => setCameraState({ openCamera: !cameraState.openCamera, btnLabel: cameraState.openCamera ? 'Webcam' : 'Close' })} buttonStyle='hidden' />
               {cameraState.btnLabel}
             </label>
@@ -54,7 +54,7 @@ function App() {
         </div>
         <div className='mt-10'>
           <div>
-            <Button buttonLabel='Clear' buttonClick={handleReset} buttonStyle='default-size-btn' />
+            <Button buttonLabel='Clear' buttonClick={handleReset} buttonStyle='default-size-btn danger' />
           </div>
           <div className='mt-10'>
             {cameraState.openCamera ? <WebcamComponent /> : null}
