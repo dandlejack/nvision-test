@@ -1,0 +1,96 @@
+.App {
+  text-align: center;
+}
+.flex {
+  display: flex;
+}
+.flex-warp{
+  flex-wrap: wrap;
+}
+.hidden {
+  display: none;
+}
+.justify-center {
+  justify-content: center;
+}
+.default-size-btn {
+  width:100px;
+  height: 30px;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.mr-10 {
+  margin-right: 10px;
+}
+.ml-10 {
+  margin-left: 10px;
+}
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+  display: inline-block;
+  cursor: pointer;
+}
+.bg-white {
+  background-color: #fff;
+}
+.border-0 {
+  border:0px
+}
+.text-underline {
+  text-decoration: underline;
+}
+#overlay {
+  position: fixed; 
+  width: 100%; 
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3); 
+  z-index: 999; 
+}
+
+.loader {
+  position:fixed;
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;  
+  margin:auto;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  z-index: 999;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); border-top:5px solid red }
+  25% {border-top:5px solid yellow}
+  50% {border-top:5px solid green}
+  75% {border-top:5px solid blue}
+  100% { transform: rotate(360deg); }
+}
+@media (min-width:375px){
+  .original-img, .result-img {
+    width:100%
+  }
+  .mr-0-sm{
+    margin-right: 0px;
+  }
+}
+@media (min-width: 1024px) { 
+  .original-img, .result-img {
+    width:800px
+  }
+}
+@media (min-width: 1280px){
+  .mr-10{
+    margin-right: 10px;
+  }
+}
