@@ -22,8 +22,8 @@ export const ResultComponent: React.FC = () => {
             let img = document.createElement("img")
             img.setAttribute("src", imgSelector.uploadImage)
             setStoreXYOfOriginal({ width: img.width, height: img.height })
-            const splitComma = imgSelector.uploadImage.split(',')
-            const response = await NipaApi.getObjectDection(splitComma[1])
+            const splitB64AndType = imgSelector.uploadImage.split(',')
+            const response = await NipaApi.getObjectDection(splitB64AndType[1])
             setBoundaries(response)
             setLoading(false)
 
@@ -34,47 +34,48 @@ export const ResultComponent: React.FC = () => {
     }, [imgSelector.uploadImage]);
 
     useEffect(() => {
-        drawCanvas()
-    }, [boundaries]);
-
-    const drawCanvas = () => {
-        let canvas = document.getElementById('canvasResult') as HTMLCanvasElement;
-        let img = document.getElementById("originalImg") as HTMLImageElement;
-        if (canvas !== null && img !== null) {
-            let ctx = canvas.getContext('2d');
-            if (ctx) {
-                ctx.drawImage(img, 0, 0, storeXYOfOriginal.width, storeXYOfOriginal.height);
-                ctx.lineWidth = 5;
-                ctx.strokeStyle = '#FF0000'
-                boundaries.detected_objects.map((detailObjs: any) => {
-                    ctx?.strokeRect(detailObjs.bounding_box.left, detailObjs.bounding_box.top, detailObjs.bounding_box.right - detailObjs.bounding_box.left, detailObjs.bounding_box.bottom - detailObjs.bounding_box.top)
-                    ctx!.font = (storeXYOfOriginal.width/35).toFixed(0).toString()+"px serif";                    
-                    ctx!.fillStyle = 'red'
-                    ctx?.fillRect(detailObjs.bounding_box.left-3,detailObjs.bounding_box.top-30,detailObjs.bounding_box.right - detailObjs.bounding_box.left+4,30)
-                    ctx!.fillStyle = 'blue'
-                    ctx!.fillText(detailObjs.name +' : '+((detailObjs.confidence*100).toFixed(2)).toString() , detailObjs.bounding_box.left, detailObjs.bounding_box.top);
-                })
-                const canvasToImage = canvas.toDataURL('image/jpeg',1)
-                setNewImage(canvasToImage)
+        const drawCanvas = () => {
+            let canvas = document.getElementById('canvasResult') as HTMLCanvasElement;
+            let originalImg = document.getElementById("originalImg") as HTMLImageElement;
+            if (canvas !== null && originalImg !== null) {
+                let ctx = canvas.getContext('2d');
+                if (ctx) {
+                    ctx.drawImage(originalImg, 0, 0, storeXYOfOriginal.width, storeXYOfOriginal.height);
+                    ctx.lineWidth = 5;
+                    ctx.strokeStyle = '#FF0000'
+                    boundaries.detected_objects.map((detailObjs: any) => {
+                        ctx?.strokeRect(detailObjs.bounding_box.left, detailObjs.bounding_box.top, detailObjs.bounding_box.right - detailObjs.bounding_box.left, detailObjs.bounding_box.bottom - detailObjs.bounding_box.top)
+                        ctx!.font = (storeXYOfOriginal.width / 35).toFixed(0).toString() + "px serif";
+                        ctx!.fillStyle = 'red'
+                        ctx?.fillRect(detailObjs.bounding_box.left - 3, detailObjs.bounding_box.top - 30, detailObjs.bounding_box.right - detailObjs.bounding_box.left + 4, 30)
+                        ctx!.fillStyle = 'blue'
+                        ctx!.fillText(detailObjs.name + ' : ' + ((detailObjs.confidence * 100).toFixed(2)).toString(), detailObjs.bounding_box.left, detailObjs.bounding_box.top);
+                        return detailObjs
+                    })
+                    const canvasToImage = canvas.toDataURL('image/jpeg', 1)
+                    setNewImage(canvasToImage)      
+                }
             }
         }
-    }
+        drawCanvas()
+    }, [boundaries,storeXYOfOriginal.width,storeXYOfOriginal.height]);
+
+
 
     return <>
         {imgSelector.uploadImage ? <div className='flex flex-warp justify-center mt-10'>
             <div className='mr-0-sm mr-10'>
                 <label>Original</label>
                 <div>
-                    <img id='originalImg' src={imgSelector.uploadImage} className='original-img' /> {/*style={{ width: 800, height: 540 }} />*/}
+                    <img alt='originalImg' id='originalImg' src={imgSelector.uploadImage} className='original-img' /> {/*style={{ width: 800, height: 540 }} />*/}
                 </div>
             </div>
             <div>
                 <label>Object Detection Result</label>
                 <div>
                     <canvas id="canvasResult" width={storeXYOfOriginal.width} height={storeXYOfOriginal.height} style={{ display: 'none' }} />
-
                     {isLoading ? <LoaderComponent /> : null}
-                    {newImage !== '' ? <img id='result' src={newImage} className='result-img'/> : null}
+                    {newImage !== '' ? <img id='result' alt='result' src={newImage} className='result-img' /> : null}
                 </div>
             </div>
         </div> : null}

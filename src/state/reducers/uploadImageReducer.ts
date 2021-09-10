@@ -1,5 +1,3 @@
-import React from 'react'
-
 const captureReducer = (state = '', action:any) => {
     switch (action.type) {
         case 'ADD':

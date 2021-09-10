@@ -16,6 +16,16 @@
 .default-size-btn {
   width:100px;
   height: 30px;
+  border: none;
+}
+.upload-box {
+  width: 640px;
+}
+.m-center {
+  margin: 0px auto;
+}
+.mt-5 {
+  margin-top: 5px;
 }
 .mt-10 {
   margin-top: 10px;
@@ -42,16 +52,22 @@ input[type="file"] {
   text-decoration: underline;
   cursor: pointer;
 }
+.primary-color {
+  background-color: #0084ff;
+  color: white;
+}
 .danger {
   background-color: #de4f44;
   color: white;
-  border: none;
+}
+.primary-color:hover {
+  background-color: #1990ff;
+  cursor: pointer;
 }
 .danger:hover {
   background-color: #f44336;  
   cursor: pointer;
 }
-
 #overlay {
   position: fixed; 
   width: 100%; 
@@ -78,25 +94,58 @@ input[type="file"] {
   bottom:0;
   z-index: 999;
 }
+.alert {
+  position: absolute;  
+  top:10px;
+  padding: 13px;
+  background-color: #ff5252;
+  color: white;
+  animation: alert-slide 0.5s;
+}
 
+.closebtn {
+  margin-right: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
 @keyframes spin {
   0% { transform: rotate(0deg); border-top:5px solid red }
   25% {border-top:5px solid yellow}
   50% {border-top:5px solid green}
-  75% {border-top:5px solid blue}
+  75% {border-top:5px solid #0000ff}
   100% { transform: rotate(360deg); }
 }
-@media (min-width:375px){
+@keyframes alert-slide {
+  from{
+    top:0px
+  }
+}
+@media (min-width:320px){
   .original-img, .result-img {
-    width:100%
+    width:90%
   }
   .mr-0-sm{
     margin-right: 0px;
   }
+  .upload-box, .alert {
+    width:100%;
+  }
 }
 @media (min-width: 1024px) { 
   .original-img, .result-img {
-    width:800px
+    width:75%;
+  }
+  .upload-box, .alert {
+    width: 640px;
   }
 }
 @media (min-width: 1280px){
